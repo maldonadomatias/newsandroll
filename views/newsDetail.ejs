@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head'); %>
+
+<body>
+    <%- include('partials/navbar'); %>
+    <div class="container">
+        <h1><%= news.title %> </h1>
+        <p><%= news.description %> </p>
+        <p><%= news.created_at %> </p>
+        <p><%= news.users.name %> </p>
+        <% if ((locals.userLogged) && (locals.userLogged.name === news.users.name)) { %>
+            <a href="/news/edit/<%= news.id %>"><button class="btn btn-dark">Edit</button></a>
+            <a href="/news/delete/<%= news.id %>"><button class="btn btn-dark">Delete</button></a>
+        <% } %>
+    </div>
+
+    <%- include('partials/footer'); %>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head'); %>
+
+<body>
+    <%- include('partials/navbar'); %>
+    <h1 class="titulo">Article to Edit:  <%= News.title %></h1>
+    <section class="formulario">
+        <form action="/news/update/<%= News.id %>" method="POST">
+
+
+            <label for="title">Title </label>
+            <p><input type="text" name="title" id="" value="<%= News.title %>" required></p>
+            <label for="description">Description </label>
+            <p><input type="text" name="description" value="<%= News.description %>" id="" required> </p>
+            <select name="genre_id" id="">
+                <option value="1">Sports</option>
+            </select>
+            
+
+            <br>
+            <p> <button class="botonAgregar" type="submit">Update</button>
+            
+            <a  class="botonVolver" href="/news">News list</a></p>
+        </form>
+    </section>
+<%- include('partials/footer'); %>
+</body>
+</html>

@@ -1,0 +1,34 @@
+[
+ {
+  "id": 1,
+  "fullName": "Javi Herrera",
+  "email": "javi@dh.com",
+  "password": "$2a$10$kbHNepDXku1qKDytFK3RpuLtkW/dqMGDi4jXL7lNQUF8lm1HZ2.N.",
+  "country": "Colombia",
+  "avatar": "1609285636788_img.jpg"
+ },
+ {
+  "id": 2,
+  "fullName": "Matias Maldonado",
+  "email": "molporron@gmail.com",
+  "password": "$2a$10$zMp/ZExjopetEYaZl.I8kuKtZTjZZCBXJ0fe5MVkw.zRuKlOrYzz6",
+  "country": "Argentina",
+  "avatar": "1634216434883_img.png"
+ },
+ {
+  "id": 3,
+  "fullName": "Sofia",
+  "email": "sofia@gmail.com",
+  "password": "$2a$10$NFswScOG5ythGVNLeuaJW.U5.9zRmDzjHKhB/E8ZYNPlc14ClsEb.",
+  "country": "Argentina",
+  "avatar": "1634229175768_img.jpg"
+ },
+ {
+  "id": 4,
+  "fullName": "Matias Maldonado",
+  "email": "asd#@gmail.com",
+  "password": "$2a$10$CYnfp/QAWzXBSgF4sOtS3eYtFV/TI8CcAPfb0K2o9qLK7/Q.wCleO",
+  "country": "Argentina",
+  "avatar": "1636458535358_img.png"
+ }
+]
