@@ -8,6 +8,7 @@ const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
 const User = require('../database/models/User');
+const News = require('../database/models/News');
 
 const controller = {
 	register: (req, res) => {
@@ -70,9 +71,17 @@ const controller = {
 			//}
 		},
 	profile: (req, res) => {
-		return res.render('userProfile', {
-			user: req.session.userLogged
-		});
+			db.News.findAll({
+				include: [{association: "users"}, {association: "genres"}
+				]})
+				.then((news) => {
+					return res.render('userProfile', {
+						user: req.session.userLogged,
+						news
+					})
+				})
+
+		
 	},
 
 	logout: (req, res) => {

@@ -20,6 +20,26 @@ label{
     color: #fff 
 }
 
+/* NavBar */
+.dropdown-menu.show {
+    display: block;
+    background: none;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25;
+    clear: both;
+    font-weight: 400;
+    color: rgba(255,255,255,.75) !important;
+    /* text-align: center; */
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    font-size: 0.9rem;
+}
 /* Hidden stuffs */
 
 .hidden{

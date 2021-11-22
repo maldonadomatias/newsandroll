@@ -6,14 +6,15 @@ const { Op } = require("sequelize");
 
 const News = db.News;
 const User = db.User;
+const Genre = db.Genre;
 
 const controller = {
 	list: (req, res) => {
         db.News.findAll({
-            include: [{association: "users"}
+            include: [{association: "users"}, {association: "genres"}
             ]})
-            .then(news => {
-                return res.render('newsList.ejs', {news})
+            .then((news, genres) => {
+                return res.render('newsList.ejs', {news, genres})
             })
     },
     add: function (req, res) {
