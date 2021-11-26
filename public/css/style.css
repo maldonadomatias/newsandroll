@@ -21,6 +21,11 @@ label{
 }
 
 /* NavBar */
+.dropdown-menu {
+    position: absolute;
+    background-color: rgb(33,37,41) !important;
+}
+
 .dropdown-menu.show {
     display: block;
     background: none;
@@ -46,12 +51,51 @@ label{
     display: none !important;
 }
 
+/* Card hide overflow */
 
+#card-description{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    height: 100px;
+    text-overflow: ellipsis;
+    margin: 0px 0px 5px 0px;
+}
+
+#card-author{
+    margin-top: 15px;
+}
+
+/* Btn */
+
+.btn-dark{
+    border: 1px solid !important;
+    transition: 0.3s ease !important;
+}
+
+.btn-dark:hover{
+    border-color: rgb(33,37,41) !important;
+}
+
+/* Validation */
+.is-invalid{
+    color: #E85F5C;
+}
+
+.is-valid{
+    color: #a0e85c;
+}
+
+.alert-warning{
+    color: #E85F5C !important;
+    background-color: transparent !important;
+    border-radius: 10px;
+}
 /* Footer */
 
 footer {
     /* background-color: orange; */
-    position: relative;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;

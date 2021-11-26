@@ -22,12 +22,9 @@
                     <div class="mb-3">
                         <label for="genre_id">Genre</label>
                         <select class="form-select" name="genre_id" id="">
-                            <option value="1">Sports</option>
-                            <option value="2">Politics</option>
-                            <option value="3">World</option>
-                            <option value="4">Business</option>
-                            <option value="5">Opinion</option>
-                            <option value="6">Culture</option>
+                            <% for( let i = 0; i < genres.length; i++ ) { %>
+                                <option value="<%= genres[i].id  %> "><%= genres[i].name  %> </option>    
+                            <% } %>
                         </select>
                     </div>
                     <% if (locals.isLogged) { %>
@@ -37,11 +34,11 @@
                     </div>
                     <% } %>
                     <button type="submit" class="btn btn-dark">Add</button>
+                    <a class="btn btn-dark" href="/news">Note list</a></p>
                 </form>
             
 
         
-                <a  class="btn btn-dark" href="/news"><button class="btn btn-dark">Note list</button></a></p>
             </form>
         </section>
     </section>

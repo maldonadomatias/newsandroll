@@ -12,29 +12,49 @@ const News = require('../database/models/News');
 
 const controller = {
 	register: (req, res) => {
-		return res.render('userRegisterForm');
+		let customError = "";
+		return res.render('userRegisterForm', {customError});
 	},
 	processRegister: function (req, res){
-		db.User.create({
-            name: req.body.name,
-			email: req.body.email,
-			password: bcryptjs.hashSync(req.body.password, 10)
-        })
-        .then(()=> res.redirect('/user/login'))            
-        .catch(error => res.send(error))
+		db.User.findOne({
+			where: {email: req.body.email}
+		}).then((userInDB) => {
+			if (userInDB) {
+				return res.render('userRegisterForm', {
+					customError: {
+						email: {
+							msg: 'Este email ya está registrado'
+						}
+					},
+					oldData: req.body
+				});
+			} else {
+				const resultValidation = validationResult(req);
+
+				if (resultValidation.errors.length > 0) {
+					return res.render('userRegisterForm', {
+						errors: resultValidation.mapped(),
+						oldData: req.body
+					});
+				}
+				else {
+					db.User.create({
+						name: req.body.name,
+						email: req.body.email,
+						password: bcryptjs.hashSync(req.body.password, 10)
+					})
+					.then(()=> res.redirect('/user/login'))            
+					.catch(error => res.send(error))
+				}
+			}
+		})
+		
 	},
 	login: (req, res) => {
-		return res.render('userLoginForm');
+		let customError = "";
+		return res.render('userLoginForm', {customError});
 	},
 	loginProcess: (req, res) => {
-			// Verifica que los campos se hayan llenado correctamente
-			// let errors = validationResult(req);
-			// // Si hay errores, renderizamos la vista nuevamente con los mensajes de error
-			// if (!errors.isEmpty()) {
-			// 	let cssSheets = ["login"];
-			// 	let title = "Inicio de sesión";
-			// 	return res.render ("users/login.ejs", {cssSheets, title, errorMessages: errors.mapped()});
-			// } else {
 				// Si no hay errores, verificamos que el email y la contraseña sean correctos
 				db.User.findAll()
 				.then(function (allUsers){
@@ -47,7 +67,7 @@ const controller = {
 					}
 					// Si no lo encontramos, renderizamos la vista nuevamente con los mensajes de error
 					if (usuarioALoguearse == undefined){
-						let customError= {
+						customError = {
 							"password": {
 								"value": "",
 								"msg": "Las credenciales no son válidas",
@@ -55,8 +75,7 @@ const controller = {
 								"location": "body"
 							}
 						}
-						let title = "Inicio de sesión"; 
-						return res.render ("user/login", {title});
+						return res.render ("userLoginForm", {customError});
 						}
 					// Si lo encontramos, borro la propiedad password para guardar el usuario en session sin su contraseña, por seguridad:
 					delete usuarioALoguearse.password;

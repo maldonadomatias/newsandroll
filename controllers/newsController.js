@@ -12,18 +12,22 @@ const controller = {
 	list: (req, res) => {
         db.News.findAll({
             include: [{association: "users"}, {association: "genres"}
-            ]})
+            ], order: [
+                ['id', 'DESC']
+        ]})
             .then((news, genres) => {
                 return res.render('newsList.ejs', {news, genres})
             })
     },
     add: function (req, res) {
-        db.News.findAll({
-            include: [{association: "users"}, {association: "genres"}
-            ]})
-            .then(news => {
-                res.render('newsAdd.ejs', {news})
-            })
+        let promiseNews = News.findAll();
+		let promiseGenre = Genre.findAll();
+
+		Promise.all([promiseNews, promiseGenre])
+			.then(function([news, genres]) {
+                res.render('newsAdd.ejs', {news:news, genres:genres});
+			})
+			.catch(error => res.send(error));
     },
     detail: (req, res) => {
         db.News.findByPk(req.params.id, {

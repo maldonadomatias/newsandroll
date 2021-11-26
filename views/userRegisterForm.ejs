@@ -9,6 +9,14 @@
 		<div class="row justify-content-center">
 			<div class="col-md-10">
 				<h2 style="color: #fff;">Formulario de registro</h2>
+				<% if (customError != "") { %>
+					<ul>
+						<li style="color:#E85F5C;"><%= customError.email.msg %> </li>
+					</ul>
+				<% } %>
+				<ul class="errors">
+
+				</ul>
 
 					<form method="POST" action="/user/register" enctype="multipart/form-data">
 						<div class="mb-3">
