@@ -1,6 +1,8 @@
 const express = require('express');
 const session = require('cookie-session');
 const cookies = require('cookie-parser');
+const { Pool } = require('pg');
+
 
 const app = express();
 
@@ -22,6 +24,10 @@ app.use(express.static('./public'));
 
 const port_number = app.listen(process.env.PORT || 3000);
 app.listen(port_number);
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
 
 // Template Engine
 app.set('view engine', 'ejs');
