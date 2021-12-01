@@ -14,5 +14,7 @@ router.post('/update/:id', newsController.update);
 router.get('/delete/:id', newsController.delete);
 router.post('/delete/:id', newsController.destroy);
 
+router.get("/search", newsController.search);
+
 
 module.exports = router;

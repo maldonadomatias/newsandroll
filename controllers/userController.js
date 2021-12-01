@@ -24,7 +24,8 @@ const controller = {
 					customError: {
 						email: {
 							msg: 'Este email ya está registrado'
-						}
+						},
+						
 					},
 					oldData: req.body
 				});
@@ -32,9 +33,15 @@ const controller = {
 				const resultValidation = validationResult(req);
 
 				if (resultValidation.errors.length > 0) {
+					console.log(resultValidation.mapped().password);
 					return res.render('userRegisterForm', {
 						errors: resultValidation.mapped(),
-						oldData: req.body
+						oldData: req.body,
+						customError: {
+							email: {
+								msg: resultValidation.mapped().password.msg,
+							}
+						}
 					});
 				}
 				else {

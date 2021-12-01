@@ -82,6 +82,20 @@ const controller = {
         .then(()=>{
             return res.redirect('/news')})
         .catch(error => res.send(error)) 
+    },
+    search: (req, res) => {
+        let search = req.query.search
+        db.News.findAll({
+            where: {title: {[Op.like]: `%${req.query.search}%`}},
+            include: [{association: "users"}, {association: "genres"}
+            ], order: [
+                ['id', 'DESC']
+        ]
+        })
+            .then((news, genres) => {
+                return res.render('userResults.ejs', {news, genres, search})
+            })
+
     }
 
 

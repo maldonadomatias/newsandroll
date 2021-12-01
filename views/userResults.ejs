@@ -5,7 +5,7 @@
 
 <body>
     <%- include('partials/navbar'); %>
-    <h1 style="font-size: 2rem;" class="d-flex justify-content-center mt-3 main-header">News</h1>
+    <h1 class="d-flex justify-content-center mt-3 main-header">News</h1>
     <br>
     <div class="container d-flex justify-content-center ">
         <p>
@@ -16,6 +16,7 @@
     <br>
     <div class="container d-flex justify-content-center">
         <div class="row">
+            <% if (news.length >= 1) { %>
             <% for( let i = 0; i < news.length; i++ ) { %>
                 <div class="col mb-5 d-flex justify-content-center">
                 <% if (news[i].users) { %>
@@ -32,6 +33,13 @@
                 <% } %>
             </div>
             <% } %>
+            <% } else if (news.length < 1) { %>
+                <h1 class="d-flex justify-content-center mt-3 main-header">
+                    No results found for your search ("<%= search %>") </h1>
+            <% } %>
+
+            
+             
         </div>
 
         
