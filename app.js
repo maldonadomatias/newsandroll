@@ -19,8 +19,9 @@ app.use(userLoggedMiddleware);
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
-app.listen(process.env.PORT | 3001, '0.0.0.0', () => 
-	console.log('Servidor levantado en el puerto 3001'));
+
+const port_number = app.listen(process.env.PORT || 3000);
+app.listen(port_number);
 
 // Template Engine
 app.set('view engine', 'ejs');
