@@ -19,7 +19,7 @@ app.use(userLoggedMiddleware);
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
-app.listen(process.env.PORT | 3001, () => 
+app.listen(process.env.PORT | 3001, '0.0.0.0', () => 
 	console.log('Servidor levantado en el puerto 3001'));
 
 // Template Engine
