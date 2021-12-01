@@ -6,27 +6,24 @@
 <body>
     <%- include('partials/navbar'); %>
     <main class="container">
-        <h1 class="titulo">Article to Edit: <em style="font-style: italic;">"<%= News.title %>"</em></h1>
+        <h1 class="titulo">Article to Edit: <em style="font-style: italic;">"<%= news.title %>"</em></h1>
     <section class="formulario">
-        <form action="/news/update/<%= News.id %>" method="POST">
+        <form action="/news/update/<%= news.id %>" method="POST">
 
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <p><input type="text" class="form-control" name="title" id="" value="<%= News.title %>" required></p>
+                <p><input type="text" class="form-control" name="title" id="" value="<%= news.title %>" required></p>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description </label>
-                <p><textarea name="description" class="form-control" id="" required><%= News.description %></textarea></p>
+                <p><textarea name="description" class="form-control" id="" required><%= news.description %></textarea></p>
             </div>
             <div class="mb-3">
                 <label for="genre_id">Genre</label>
                 <select class="form-select" name="genre_id" id="">
-                    <option value="1">Politics</option>
-                    <option value="2">Sports</option>
-                    <option value="3">Culture</option>
-                    <option value="4">World</option>
-                    <option value="5">Business</option>
-                    <option value="6">Opinion</option>
+                    <% for( let i = 0; i < genres.length; i++ ) { %>
+                        <option value="<%= genres[i].id  %> "><%= genres[i].name  %> </option>    
+                    <% } %>
                 </select>
             </div>
         

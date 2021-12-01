@@ -49,10 +49,14 @@ const controller = {
     },
     edit: function(req, res) {
         let newsID = req.params.id;
-        db.News.findByPk(newsID)
-            .then(News => {
-                return res.render('newsEdit', {News})
-            });      
+        let promiseNews = db.News.findByPk(newsID)
+        let promiseGenre = Genre.findAll();
+
+        Promise.all([promiseNews, promiseGenre])
+            .then(function([news, genres]) {
+                res.render('newsEdit', {news:news, genres:genres});
+            })
+            .catch(error => res.send(error));
     },
     update: function(req,res) {
         let newsID = req.params.id;
