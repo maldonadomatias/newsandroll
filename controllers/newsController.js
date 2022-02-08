@@ -112,7 +112,7 @@ const controller = {
 		Promise.all([promiseNews, promiseGenre])
 			.then(function([news, genres, search]) {
                 res.render('userResults.ejs', {news:news, genres:genres, search});
-			})
+			})gi
 			.catch(error => res.send(error));
 
     },
