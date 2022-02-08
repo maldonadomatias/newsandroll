@@ -7,8 +7,7 @@ const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
-const User = require('../database/models/User');
-const News = require('../database/models/News');
+
 
 const controller = {
 	register: (req, res) => {
@@ -50,7 +49,7 @@ const controller = {
 						email: req.body.email,
 						password: bcryptjs.hashSync(req.body.password, 10)
 					})
-					.then(()=> res.redirect('/user/login'))            
+					.then(()=> res.redirect('/user/login'))           
 					.catch(error => res.send(error))
 				}
 			}
@@ -58,8 +57,14 @@ const controller = {
 		
 	},
 	login: (req, res) => {
+		let promiseGenres = db.Genre.findAll();
 		let customError = "";
-		return res.render('userLoginForm', {customError});
+
+        Promise.all([promiseGenres])
+			.then(function([genres]) {
+			res.render('userLoginForm', {customError, genres:genres});
+			})
+			.catch(error => res.send(error));
 	},
 	loginProcess: (req, res) => {
 				// Si no hay errores, verificamos que el email y la contraseña sean correctos

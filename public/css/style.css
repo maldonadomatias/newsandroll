@@ -18,6 +18,16 @@
     --italic-font: "EB Garamond", serif;
   }
 
+  a{
+    text-decoration: none !important;
+    color: #fff !important;
+    transition: all ease-in-out 0.2s;
+  }
+
+  a:hover{
+    color: rgb(180, 180, 180) !important;
+  }
+
 body{
     background-color: rgb(33,37,41) !important;
 }
@@ -126,6 +136,15 @@ label{
     background-color: transparent !important;
     border-radius: 10px;
 }
+
+/* Genres */
+
+#genres{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 /* Footer */
 
 footer {

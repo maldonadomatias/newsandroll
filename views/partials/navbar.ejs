@@ -17,12 +17,9 @@
 						Categories
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" onclick="filterObjects('all')" href="#">All</a>
-						<a class="dropdown-item" onclick="filterObjects('sports')" href="#">Sports</a>
-						<a class="dropdown-item" onclick="filterObjects('politics')" href="#">Politics</a>
-						<a class="dropdown-item" onclick="filterObjects('culture')" href="#">Culture</a>
-						<a class="dropdown-item" onclick="filterObjects('opinion')" href="#">Opinion</a>
-						<a class="dropdown-item" onclick="filterObjects('business')" href="#">Business</a>
+						<% genres.forEach(genre => { %>
+							<a class="dropdown-item" href="/news/<%= genre.id %> "><%= genre.name %></a>     
+						<% }) %>
 					</ul>
 				</li>
 			</ul>

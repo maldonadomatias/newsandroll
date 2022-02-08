@@ -10,17 +10,23 @@ const Genre = db.Genre;
 
 const controller = {
 	list: (req, res) => {
-        db.News.findAll({
+        let promiseNews = db.News.findAll({
             include: [{association: "users"}, {association: "genres"}
             ], order: [
                 ['id', 'DESC']
-        ]})
-            .then((news, genres) => {
-                return res.render('newsList.ejs', {news, genres})
-            })
+        ]});
+        let promiseGenres = Genre.findAll();
+
+        Promise.all([promiseNews, promiseGenres])
+			.then(function([news, genres]) {
+			res.render('newsList', {news:news, genres:genres});
+			})
+			.catch(error => res.send(error));
     },
-    add: function (req, res) {
-        let promiseNews = News.findAll();
+    add: (req, res) => {
+        let promiseNews = News.findAll({
+            include: [{association: "users"}, {association: "genres"}
+            ]});
 		let promiseGenre = Genre.findAll();
 
 		Promise.all([promiseNews, promiseGenre])
@@ -30,12 +36,17 @@ const controller = {
 			.catch(error => res.send(error));
     },
     detail: (req, res) => {
-        db.News.findByPk(req.params.id, {
-            include: [{association: "users"}
+        let promiseNews = db.News.findByPk(req.params.id, {
+            include: [{association: "users"}, {association: "genres"}
             ]})
-            .then(news => {
-                res.render('newsDetail.ejs', {news});
-            });
+        
+        let promiseGenre = Genre.findAll();
+
+		Promise.all([promiseNews, promiseGenre])
+			.then(function([news, genres]) {
+                res.render('newsDetail.ejs', {news:news, genres:genres});
+			})
+			.catch(error => res.send(error));
     },
     create: function (req, res) {
         db.News.create({
@@ -89,18 +100,39 @@ const controller = {
     },
     search: (req, res) => {
         let search = req.query.search
-        db.News.findAll({
+        let promiseNews = db.News.findAll({
             where: {title: {[Op.like]: `%${req.query.search}%`}},
             include: [{association: "users"}, {association: "genres"}
             ], order: [
                 ['id', 'DESC']
         ]
         })
-            .then((news, genres) => {
-                return res.render('userResults.ejs', {news, genres, search})
-            })
+        let promiseGenre = Genre.findAll();
 
-    }
+		Promise.all([promiseNews, promiseGenre])
+			.then(function([news, genres, search]) {
+                res.render('userResults.ejs', {news:news, genres:genres, search});
+			})
+			.catch(error => res.send(error));
+
+    },
+    categories: (req,res) => {
+    let promiseNewsCategories = db.News.findAll({
+        where: {genre_id: req.params.id},
+        include: [{association: "users"}, {association: "genres"}
+        ]
+    });
+    let promiseGenresCategories = db.Genre.findAll();
+
+    
+    
+    Promise.all([promiseNewsCategories, promiseGenresCategories])
+    .then(function([news, genres]) {
+        res.render('newsCategories', {news:news, genres:genres});
+        })
+        .catch(error => res.send(error));
+
+	}
 
 
 

@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cookies = require('cookie-parser');
 const { Pool } = require('pg');
+const path = require('path')
 
 
 const app = express();
@@ -22,8 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('./public'));
 
-const port_number = app.listen(process.env.PORT || 3000);
+
+
+const port_number = app.listen(process.env.PORT || 3001);
+
 app.listen(port_number);
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
@@ -37,6 +42,11 @@ const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 
+//Aquí llamo a la ruta de las api de usuarios
+const apiUserRouter = require('./routes/api/user')
+
 app.use('/', mainRoutes);
 app.use('/user', userRoutes);
 app.use('/news', newsRoutes);
+
+app.use('/api/user', apiUserRouter);

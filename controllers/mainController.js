@@ -1,7 +1,17 @@
+const db = require('../database/models');
+
+
+const Genre = db.Genre;
 
 const controller = {
 	index: (req, res) => {
-		return res.render('index');
+		let promiseGenres = Genre.findAll();
+
+        Promise.all([promiseGenres])
+			.then(function([genres]) {
+			res.render('index', {genres:genres});
+			})
+			.catch(error => res.send(error));
 	}
 
 }

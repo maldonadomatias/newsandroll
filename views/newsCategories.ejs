@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('partials/head'); %>
+
+<body>
+    <%- include('partials/navbar'); %>
+    <h1 style="font-size: 2rem;" class="d-flex justify-content-center mt-3 main-header">News</h1>
+    <br>
+
+    <ul id="genres">
+        <% genres.forEach(genre => { %>
+            <li><a href="/news/<%= genre.id %> "><%= genre.name %></a></li>      
+        <% }) %>
+    </ul>
+    <br>
+
+    <div class="container d-flex justify-content-center ">
+        <p>
+            <a class="btn btn-dark" href="/news/add">Add new</a>
+            <a class="btn btn-dark" href="/">Home</a>
+        </p>  
+    </div>
+    <br>
+
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <% if (news.length >= 1) { %>
+            <% for( let i = 0; i < news.length; i++ ) { %>
+                <div class="col mb-5 d-flex justify-content-center">
+                <% if (news[i].users) { %>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= news[i].title %></h5>
+                          <p class="card-text" id="card-description" style="color: #222222;"><%= news[i].description %></p>
+                          <a href="/news/detail/<%= news[i].id %>">
+                            <button class="btn btn-dark">Read More</button>
+                         </a>
+                          <p class="card-text" id="card-author" style="color: #222222;">Escrito por: <%= news[i].users.name %></p>
+                        </div>
+                      </div>
+                <% } %>
+            </div>
+            <% } %> 
+            <% } else { %>
+                <h1 class="d-flex justify-content-center mt-3 main-header">
+                    No results found for your Categories </h1>
+            <% } %>
+        </div>
+
+        
+      </div>
+    <%- include('partials/footer'); %>
+</body>
+
+</html>
