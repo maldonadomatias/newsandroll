@@ -5,11 +5,11 @@
 
 <body>
     <%- include('partials/navbar'); %>
-    <div class="container">
+    <div id="detailSquare" class="container">
         <h1 style="font-size: 2rem;" class="main-header"><%= news.title %> </h1>
         <p><%= news.description %> </p>
-        <p>Created by: <%= news.users.name %> </p>
-        <p>Genre: <%= news.genres.name %> </p>
+        <i>Created by: <b><%= news.users.name %> </b></i>
+        <i>Genre: <b><%= news.genres.name %></b></i>
         <% if ((locals.userLogged) && (locals.userLogged.name === news.users.name)) { %>
             <a href="/news/edit/<%= news.id %>"><button class="btn btn-dark">Edit</button></a>
             <a href="/news/delete/<%= news.id %>"><button class="btn btn-dark">Delete</button></a>

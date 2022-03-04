@@ -24,6 +24,10 @@
     transition: all ease-in-out 0.2s;
   }
 
+  i{
+    color: #fff !important;
+  }
+
   a:hover{
     color: rgb(180, 180, 180) !important;
   }
@@ -64,6 +68,8 @@ label{
 }
 
 /* NavBar */
+
+
 .dropdown-menu {
     position: absolute;
     background-color: rgb(33,37,41) !important;
@@ -208,6 +214,12 @@ footer {
 
 #icon--search{
     font-family: FontAwesome, var(--body-font);
+}
+
+#detailSquare{
+  background-color: #8b8b8b10;
+  border-radius: 15px;
+  padding: 10px;
 }
 
 @media screen and (min-width: 900px) {

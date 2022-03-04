@@ -1,51 +1,87 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
-		<a class="navbar-brand" href="/">News & Roll
-		</a>
-	
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		
-	
-		<div class="collapse navbar-collapse" id="mainNavbar">
-			<ul class="navbar-nav me-auto">
-				<li class="nav-item"><a class="nav-link" href="/news">All Notes</a></li>
-				<li class="nav-item"><a class="nav-link" href="/">Contact us</a></li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Categories
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<% genres.forEach(genre => { %>
-							<a class="dropdown-item" href="/news/<%= genre.id %> "><%= genre.name %></a>     
-						<% }) %>
-					</ul>
-				</li>
-			</ul>
-			<ul class="navbar-nav align-items-center" id="right--navbar">
-				<li class="nav-item">
-					<form action="/news/search" method="GET" class="search">
-						<div class="searchBox">
-							<input name="search" type="text" id="icon--search" class="inputSearch" placeholder=" &#61442;">
-						</div>
-					</form>
-				</li>
-				<% if (locals.isLogged) { %>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Hi, <%= locals.userLogged.name %>!
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="/user/profile">My profile</a>
-							<li><hr class="dropdown-divider"></li>
-							<a class="dropdown-item" href="/user/logout">Logout</a>
-						</ul>
-					</li>
-				<% } else { %>
-					<li class="nav-item"><a class="nav-link" href="/user/login"><i style="color: #fff !important" class="far fa-user"></i></a></li>
-				<% } %>
-			</ul>
-		</div>
-	</div>
+  <div class="container">
+    <a class="navbar-brand" href="/">News & Roll </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/news">All Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">Contact us</a></li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="dropUser"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Categories
+          </a>
+          <ul
+            class="dropdown-menu"
+            id="menuScroll"
+            aria-labelledby="navbarDropdown"
+          >
+            <% genres.forEach(genre => { %>
+            <a class="dropdown-item" href="/news/<%= genre.id %> "
+              ><%= genre.name %></a
+            >
+            <% }) %>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav align-items-center" id="right--navbar">
+        <li class="nav-item">
+          <form action="/news/search" method="GET" class="search">
+            <div class="searchBox">
+              <input
+                name="search"
+                type="text"
+                id="icon--search"
+                class="inputSearch"
+                placeholder=" &#61442;"
+              />
+            </div>
+          </form>
+        </li>
+        <% if (locals.isLogged) { %>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="dropUser"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Hi, <%= locals.userLogged.name %>!
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/user/profile">My profile</a>
+            <li><hr class="dropdown-divider" /></li>
+            <a class="dropdown-item" href="/user/logout">Logout</a>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/login"
+            ><i style="color: #fff !important" class="far fa-user"></i
+          ></a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
 </nav>
