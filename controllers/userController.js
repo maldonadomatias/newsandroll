@@ -125,14 +125,16 @@ const controller = {
     //}
   },
   profile: (req, res) => {
-    db.News.findAll({
+    let promiseNews = db.News.findAll({
       include: [{ association: "users" }, { association: "genres" }],
-    }).then((news) => {
-      return res.render("userProfile", {
-        user: req.session.userLogged,
-        news,
-      });
     });
+    let promiseGenre = Genre.findAll();
+
+    Promise.all([promiseNews, promiseGenre])
+      .then(function ([news, genres, user]) {
+        res.render("userProfile", { news: news, genres: genres, user: req.session.userLogged, });
+      })
+      .catch((error) => res.send(error));
   },
 
   logout: (req, res) => {
