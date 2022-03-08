@@ -84,11 +84,14 @@ const controller = {
     },
     delete: function (req, res) {
         let newsID = req.params.id;
-        db.News
-        .findByPk(newsID)
-        .then(News => {
-            return res.render('newsDelete', {News})})
-        .catch(error => res.send(error))
+        let promiseNews = db.News.findByPk(newsID)
+        let promiseGenre = Genre.findAll();
+
+        Promise.all([promiseNews, promiseGenre])
+            .then(function([News, genres]) {
+                res.render('newsDelete', {News:News, genres:genres});
+            })
+            .catch(error => res.send(error));
     },
     destroy: function (req, res) {
         let newsID = req.params.id;
